@@ -1,0 +1,24 @@
+{% extends "foodtracker/base.html"%}
+{% block navbar %}
+    {% include "foodtracker/includes/navbar.html" with section="food"%}
+{% endblock navbar %}
+
+{% block top_full %}
+    {% comment %}
+        A calculation is just a foodbase where the numbers are modifiers by a unit of measure multiplier in the view.
+    {% endcomment %}
+    <p>A foodbase {{foodbase.name}}</p>
+        
+    {% for calc in calculations %}
+           <div class="calculation">
+            <h3>{{calc.name}}</h3>
+            <ul>
+                <li><b>Fat:</b> {{calc.fat}}g</li>
+                <li><b>Protein:</b> {{calc.protein}}g</li>
+                <li><b>Carbs:</b> {{calc.carbs}}g</li>
+                <li><b>Fiber:</b> {{calc.fiber}}g</li>
+            </ul>
+        </div>
+    {% endfor %}
+
+{% endblock top_full %}
