@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from foodtracker.models import Food, Dish, Log, Unit, FoodBase
+from django.core import serializers
 # Create your views here.
 
 def index(request):
@@ -34,6 +35,16 @@ def food(request, id):
         calculations.append(Calculation(foodbase[0], unit))
 
     context = {"foodbase": foodbase[0],
-               "calculations": calculations }
+               "calculations": calculations,
+               "request":request.GET}
 
-    return render(request, "foodtracker/food.html", context)
+    if request.method == "GET":
+        if "f" in request.GET:
+            if request.GET['f'] == "json":            
+                data = serializers.serialize('json', foodbase)
+                returnvar = HttpResponse(data, content_type="application/json")
+            else:
+                returnvar = render(request, "foodtracker/food.html", context)
+        else:
+            returnvar = render(request, "foodtracker/food.html", context)
+        return returnvar 

@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^log/$', views.logIndex, name="logIndex"),
     url(r'^food/$', views.foodIndex, name="foodIndex"),
-    url(r'^food/(\d+)/', views.food, name="food")
+    url(r'^food/(\d+)/', views.food, name="food"),
 ]
